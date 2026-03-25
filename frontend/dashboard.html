@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskManager — Dashboard</title>
+    <meta name="description" content="Manage your personal tasks, set priorities, and track your progress.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="ambient-bg"></div>
+
+<div class="dashboard-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="brand">
+            <ion-icon name="layers" style="color: var(--accent-color);"></ion-icon>
+            TaskManager
+        </div>
+        <div class="user-controls">
+            <span class="username-display" id="displayUsername">Loading...</span>
+            <button id="logoutBtn" class="btn btn-outline" style="padding: 0.5rem 1rem;">
+                <ion-icon name="log-out-outline"></ion-icon> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="tasks-header">
+            <div>
+                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Your Tasks</h1>
+                <p style="color: var(--text-secondary);">Manage and track your goals effectively.</p>
+            </div>
+            <button class="btn btn-primary" id="openCreateTaskModal" style="width: auto;">
+                <ion-icon name="add-outline"></ion-icon> New Task
+            </button>
+        </div>
+
+        <!-- Task Grid -->
+        <div class="tasks-grid" id="tasksList">
+            <!-- Skeleton Loading State UI -->
+            <div class="task-card" style="opacity: 0.5;">
+                <p style="color: var(--text-secondary); text-align: center; padding: 2rem 0;">Loading Tasks...</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Create/Edit Task Modal -->
+<div class="modal-overlay" id="taskModalOverlay">
+    <div class="modal glass-panel">
+        <div class="modal-header">
+            <h2 id="modalTitle">Create New Task</h2>
+            <button class="btn-close" id="closeTaskModal">&times;</button>
+        </div>
+
+        <form id="taskForm">
+            <input type="hidden" id="taskId">
+            <div class="input-group">
+                <label for="taskTitle">Title</label>
+                <input type="text" id="taskTitle" placeholder="What needs to be done?" required>
+            </div>
+
+            <div class="input-group">
+                <label for="taskDescription">Description</label>
+                <textarea id="taskDescription" rows="3" style="width: 100%; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0, 0, 0, 0.2); color: white; padding: 1rem; font-family: 'Outfit'; resize: vertical;" placeholder="Add some details..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <div class="input-group" style="flex: 1;">
+                    <label for="taskStatus">Status</label>
+                    <select id="taskStatus">
+                        <option value="PENDING">Pending</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="COMPLETED">Completed</option>
+                    </select>
+                </div>
+
+                <div class="input-group" style="flex: 1;">
+                    <label for="taskPriority">Priority</label>
+                    <select id="taskPriority">
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;" id="saveTaskBtn">
+                Save Task
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Notification Container -->
+<div id="toast" class="toast">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    <span id="toastMessage">Message</span>
+</div>
+
+<!-- Application Script -->
+<script src="js/dashboard.js"></script>
+</body>
+</html>
